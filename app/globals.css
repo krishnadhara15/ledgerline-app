@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Ledgerline design tokens.
+ * Cool paper white, near-black ink, one ledger-green accent,
+ * amber for pending, restrained red strictly for conflict.
+ * Light mode only — this is a deliberate, calm professional tool.
+ */
+:root {
+  --background: #fafbfc;
+  --foreground: #16191b;
+
+  --card: #ffffff;
+  --card-foreground: #16191b;
+  --popover: #ffffff;
+  --popover-foreground: #16191b;
+
+  --primary: #1e6b4f; /* ledger green */
+  --primary-foreground: #f6faf8;
+  --secondary: #eef1f2;
+  --secondary-foreground: #16191b;
+  --muted: #f1f3f4;
+  --muted-foreground: #5b6570;
+  --accent: #eef1f2;
+  --accent-foreground: #16191b;
+  --destructive: #b3261e; /* restrained red, conflict only */
+  --destructive-foreground: #fdf5f4;
+
+  --border: #e3e7e9;
+  --input: #d6dbde;
+  --ring: #1e6b4f;
+
+  /* status hues beyond the shadcn set */
+  --verified: #1e6b4f;
+  --pending: #b45309; /* amber ink */
+  --pending-soft: #fcf6ea; /* amber tint */
+  --ai-soft: #f3f7f5; /* faint green tint for AI-touched values */
+  --conflict-soft: #fbf0ef;
+  --locked: #6b7480;
+
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-verified: var(--verified);
+  --color-pending: var(--pending);
+  --color-pending-soft: var(--pending-soft);
+  --color-ai-soft: var(--ai-soft);
+  --color-conflict-soft: var(--conflict-soft);
+  --color-locked: var(--locked);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-hand: var(--font-caveat), cursive;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: var(--font-newsreader), ui-serif, Georgia, serif;
+}
+
+/* The numerals are the brand: every figure is tabular and right-aligned. */
+.figure {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* One-shot highlight pulse over a document region. */
+@keyframes region-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(30, 107, 79, 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 10px rgba(30, 107, 79, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(30, 107, 79, 0);
+  }
+}
+.region-pulse {
+  animation: region-pulse 900ms ease-out 1;
+}
+
+/* Soft flash used for hover "peek" on the document pane. */
+@keyframes region-peek {
+  0%,
+  100% {
+    background-color: rgba(30, 107, 79, 0.06);
+  }
+  50% {
+    background-color: rgba(30, 107, 79, 0.18);
+  }
+}
+.region-peek {
+  animation: region-peek 1100ms ease-in-out infinite;
+}
+
+/* Verification calms the page: decoration falls away in ~200ms. */
+.calm-transition {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    opacity 200ms ease;
+}
+
+/* Scanned-paper grain for low-quality documents (CSS only, no images). */
+.scan-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.025) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.02) 0px,
+      transparent 1px,
+      transparent 4px
+    );
+}
