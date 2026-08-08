@@ -1,6 +1,6 @@
 # Ledgerline
 
-Live: [url] · Video: [url]
+Live: https://ledgerline-app-one.vercel.app · Video: [url]
 
 A return-review platform for a CPA firm where AI does the tedious reading and humans keep
 judgment — and every number on a return is one click away from the exact spot on the paper
